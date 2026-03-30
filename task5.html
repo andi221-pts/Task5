@@ -661,6 +661,12 @@
         }
 
         function nextQuestion() {
+            // Validation: Check if the current question is answered
+            if (userAnswers[currentQuestionIndex] === undefined && !isReviewMode) {
+                alert("Please select an answer before moving to the next question.");
+                return;
+            }
+
             if (currentQuestionIndex < currentExam.questions.length - 1) {
                 currentQuestionIndex++;
                 loadQuestion(currentQuestionIndex);
