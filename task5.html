@@ -651,8 +651,7 @@
                 nextBtn.classList.remove('hidden');
                 submitBtn.classList.add('hidden');
 
-                // Optional: disable next if not answered
-                // if (!isAnswered) { nextBtn.classList.add('disabled'); } else { nextBtn.classList.remove('disabled'); }
+                if (!isAnswered) { nextBtn.classList.add('disabled'); } else { nextBtn.classList.remove('disabled'); }
 
             } else {
                 nextBtn.classList.add('hidden');
@@ -661,7 +660,6 @@
         }
 
         function nextQuestion() {
-            // Validation: Check if the current question is answered
             if (userAnswers[currentQuestionIndex] === undefined && !isReviewMode) {
                 alert("Please select an answer before moving to the next question.");
                 return;
@@ -683,6 +681,12 @@
         // --- SCREEN 3: RESULTS & SUBMISSION LOGIC ---
 
         function submitExam() {
+            // Validation: Check if the final question is answered
+            if (userAnswers[currentQuestionIndex] === undefined) {
+                alert("Please select an answer before submitting the exam.");
+                return;
+            }
+
             const totalQuestions = currentExam.questions.length;
             let score = 0;
 
